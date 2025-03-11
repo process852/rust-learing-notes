@@ -110,3 +110,90 @@ let b: [3; 5];
 let first = a[0]; // 数组索引
 
 ```
+
+## 函数(function)
+
+函数使用关键字`fn`来标识。Rust 不关心函数定义的先后顺序，只要函数在调用函数可见的作用域即可。
+
+
+#### 参数(parameters)
+
+* Rust 中函数参数必须声明参数的类型
+
+#### Statements and Expressions
+
+* 语句(statements)是执行某些操作不返回值的指令
+* 表达式(expressions)是存在评估结果值的,**表达式不包含结束的分号**。
+
+```rust
+let y = 3; // 此处是语句，并不返回值
+
+// 函数调用是一个表达式
+// 宏调用也是一个表达式
+// 花括号包裹的作用域快也是一个表达式
+
+let x = {
+	let x = 3;
+	x + 1
+}
+```
+
+#### 函数返回值
+
+函数返回类型声明使用`->`，函数返回值等于函数体花括号内最后一个表达式的值。
+
+```Rust
+// 返回值为5, 类型为 i32
+fn five() -> i32 {
+	5
+}
+```
+
+## 注释
+
+Rust 使用`//`进行行注释
+
+## 控制流(Control Flow)
+
+#### if 表达式
+```Rust
+fn main { 
+	let number = 3;
+	
+	if number < 5 {
+		println!("condition was true");
+	} else {
+		println!("condition was false");
+	}
+}
+```
+
+#### Loops
+
+Rust 存在三种形式的循环。
+
+* loop
+
+```Rust
+fn main() {
+	let mut count = 0;
+	// loop 可以使用标签说明指代那个loop，标签名需要使用单引号开头
+	'counting_up: loop {
+		println!()
+	}
+}
+```
+
+* while
+
+* for
+
+```Rust
+fn main() {
+	let a = [10, 20, 30, 40];
+
+	for element in a {
+		println!("The value is: {element}");
+	}
+}
+```
