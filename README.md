@@ -197,3 +197,43 @@ fn main() {
 	}
 }
 ```
+
+## 所有权(Ownership)
+
+所有权特性是Rust中的核心特征，用于保证在没有垃圾回收的前提下保证内存安全。所有权是一套
+规则集合用于管理内存。
+
+Owership Rules:
+
+* 每个值拥有一个拥有者
+* 一次只能拥有一个拥有者
+* 当拥有者超出作用域范围，值会被丢弃
+
+Variable Scope:
+
+当变量进入作用域开始有效，直到走出作用域范围。
+
+```Rust
+{
+	let s = "hello"; // s 开始有效
+}  // 走出作用域后 s 不再有效
+```
+
+#### Memory and Allocation
+
+```Rust
+let s1 = String::from("hello");
+
+// 本质上是拷贝了s1中指向字符串的指针
+// Rust 会自动使得 s1 无效，这种称为 move 行为
+// 大大减少了内存数据的拷贝
+let s2 = s1;
+
+
+let mut s = String::from("hello");
+// 对于已经初始化的变量值，重新赋值时
+// Rust 通过drop函数立即释放"hello"的内存
+s = String::from("ahoy");
+
+```
+
