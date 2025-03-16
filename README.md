@@ -237,3 +237,44 @@ s = String::from("ahoy");
 
 ```
 
+## References and Borrowing
+
+```Rust
+fn main() {
+    let s = String::from("Hello"); // 变量 s 仍保持对于字符串的所有权
+
+    // & 表示引用，但是不会改变所有权，即类似于指针
+    let length = calculate_length(&s);
+
+    println!("{0} length is {1}", s, length);
+}
+
+fn calculate_length(s: &String)->usize{
+	// 由于 s 是对于字符串的借用，无法修改字符串内容
+    s.len()
+}
+```
+
+* mutable reference(可变引用)
+	* 同一时刻不可以可变引用多次(防止对于数据的同时修改，避免数据竞争)
+	* 但是不再同一时刻发生的可变引用是可行的
+	* 不可以同时拥有可变引用和不可变引用
+	* 多个不可变引用是可行的，即不可变引用只具有读数据的权限
+	* 引用的作用域范围从被引入到最后一次该引用被使用时结束
+
+```Rust
+fn main() {
+    let mut s = String::from("Hello");
+    let r1 = &mut s;
+
+    println!{"{r1}"};
+
+    let r2 = &mut s;
+    println!("{r2}");
+    
+}
+
+```
+
+* Dangling References(悬空引用)
+引用总是指向有效的内存地址。
