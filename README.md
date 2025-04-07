@@ -278,3 +278,48 @@ fn main() {
 
 * Dangling References(悬空引用)
 引用总是指向有效的内存地址。
+
+
+## Packages and Crates
+
+* 一个crate 是编译器考虑的最小代码组织单元
+* crate 可以包含 modules 
+* 一个crate 可以以两种形式存在，二进制crate或库crate
+	* 包含 main 的crate是可执行文件
+	* 库crate不包含main函数
+* package 是包含一个或多个crates
+	* 一个package 包含一个 `Cargo.toml` 文件用于描述如何构建包中的`crates`
+	* 一个package 可以包含许多二进制`crates`,但是至多只有一个库`crate`
+* `src/main.rs`是二进制crate的root，`src/lib.rs`是库crate的root.
+* 一个package 可以放置多个二进制`crate`在`src/bin`目录下
+
+#### 模块和路径系统
+
+编译器是如何工作的关于模块和路径：
+
+* 首先查找 `src/main.rs` 和 `src/lib.rs` 两个根 crate
+* 在 crate root file中我们可以声明新的模块，·例如`mod garden;`
+* 然后编译器在以下路径搜索模块的代码
+	* 内嵌模式 `mod garden {...}`
+	* 文件 `src/garden.rs`
+	* 文件 `src/garden/mod.rs`
+* 可以在非root crate 文件中声明子模块`mod vegetables;`
+	* 內联模式
+	* `src/garden/vegetables.rs`
+	* `src/garden/vegetables/mod.rs`
+* 同一个module内的所有内容可以被其他部分使用，只要遵循权限规则
+	* `crate::garden::vegetables::某个对象`
+* 私有和公有属性
+	* 默认情况下子模块内容对于父模块是不可见的
+	* 使用关键字`pub`改变权限
+* `use` 关键字可以减少过长路径的编写
+
+
+路径(PATH):
+
+为了指示如何在模块树中找到所需的对象，需要提供对象的路径(类似于文件系统)。
+
+* 绝对路径：对于外部crate的代码，绝对路径开始于crate name。对于当前crate,则使用`crate`
+* 相对路径：相对当前模块，使用`self`/`super`等关键字或者目前模块的标识符
+
+
