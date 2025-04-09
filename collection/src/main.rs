@@ -2,6 +2,70 @@
 fn main() {
     show_vectors();
     show_string();
+    show_hashmap();
+}
+
+fn show_hashmap() {
+    use std::collections::HashMap;
+
+    // 创建空的hash map
+    let mut scores = HashMap::new();
+
+    // 插入元素 数据存储在堆区
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    // hash map 键值必须是同一类型，值也必须是同一类型
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name).copied().unwrap_or(0);
+
+    println!("Blue score is {score}");
+
+    // 迭代遍历 数据对
+    for (key, value) in &scores{
+        println!("{key}: {value}");
+    }
+
+
+    // 对于拥有所有权的字符串，值将被移动至hash map,原来的变量不再有效
+    let field_name: String = String::from("Favourite food");
+    let field_value: String = String::from("Blue");
+
+    let mut map: HashMap<String, String> = HashMap::new();
+
+    map.insert(field_name, field_value);
+
+    // unvaild field_name was moved to map
+    // println!("field_name: {field_name}");
+
+    // 如何更新hash map中的值
+    // hash map 中同一个key 只能有一个value
+
+    // 1. 覆盖已有key对应的原有数据值
+    scores.insert(String::from("Yellow"), 20);
+    let score = scores.get(&String::from("Yellow")).copied().unwrap_or(0);
+    println!("Yellow: {score}"); // 输出 20
+
+    // 2. 如果key存在，则不修改原始数据，若key不存在，则插入对应的值
+    // entry 方法返回 Entry 的枚举表示可能存在或不存在
+    scores.entry(String::from("Yellow")).or_insert(66); // 不修改
+    scores.entry(String::from("Green")).or_insert(8); // 插入新的键值对
+
+    println!("{scores:?}");
+
+    // 3. 基于hash map中的旧值进行更新
+
+    let text = "hello world wonderful world";
+    let mut map = HashMap::new();
+
+    for word in text.split_ascii_whitespace(){
+        // or_insert 返回一个可变引用 &mut v
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+
+    println!("{map:?}")
+
 }
 
 fn show_string() {
