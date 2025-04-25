@@ -1,4 +1,5 @@
 # rust-learing-notes
+
 Learning Rust !!!
 
 ## 安装教程
@@ -17,7 +18,7 @@ cargo build
 
 // 将构建和执行可执行文件合并为一步
 cargo run
-``` 
+```
 
 ## Rust 变量和可变性
 
@@ -35,9 +36,9 @@ let mut y = 1; // 关键字 mut 表示该变量是可修改的
 
 常量是指值被绑定到一个名字上，也不被允许修改。但是常量和不可变变量存在细微差别：
 
-* 常量总是不可变，即不可以使用`mut`关键字
-* 常量可以在任何作用域被声明
-* 常量的值可以是常量表达式(constant expression)
+- 常量总是不可变，即不可以使用`mut`关键字
+- 常量可以在任何作用域被声明
+- 常量的值可以是常量表达式(constant expression)
 
 ```rust
 // 常量名字为 THREE_HOURS_IN_SCONDS
@@ -55,40 +56,37 @@ Rust 是一静态类型语言，必须在编译期知道所有变量的类型。
 
 #### Scalar types
 
-Rust有4种基本基本数据类型
+Rust 有 4 种基本基本数据类型
 
-* Integers
+- Integers
 
-| 位长度 | 有符号数 | 无符号数
-| --- | --- | ---
-| 8-bit | i8 | u8
-| 16-bit | i16 | u16
-| 32-bit | i32 | u32
-| 64-bit | i64 | u64
-| 128-bit | i128 | u128
-| arch | isize | usize
+| 位长度  | 有符号数 | 无符号数 |
+| ------- | -------- | -------- |
+| 8-bit   | i8       | u8       |
+| 16-bit  | i16      | u16      |
+| 32-bit  | i32      | u32      |
+| 64-bit  | i64      | u64      |
+| 128-bit | i128     | u128     |
+| arch    | isize    | usize    |
 
-
-* Floating-point
+- Floating-point
 
 浮点数类型存在 `f32`和`f64`两种类型，浮点数都是有符号的。
 
-
-* Booleans
+- Booleans
 
 布尔值主要是通过`true`或`false`来表示，布尔变量默认大小是一个字节(byte)。
 
-* Characters
+- Characters
 
-Rust 中字符类型用`char`表示，使用**单引号**。Rust中`char`的大小是4字节大小，可以表示比ASCII
+Rust 中字符类型用`char`表示，使用**单引号**。Rust 中`char`的大小是 4 字节大小，可以表示比 ASCII
 更多的字符。
-
 
 #### 复合类型(Compound Types)
 
-复合类型可以将多个值打包到一个类型中，Rust中有两个基本复合类型。
+复合类型可以将多个值打包到一个类型中，Rust 中有两个基本复合类型。
 
-* Tuple
+- Tuple
 
 元组类型一旦创建完毕，大小不可以更改。元组可以包含**不同的数据类型**。
 
@@ -96,7 +94,7 @@ Rust 中字符类型用`char`表示，使用**单引号**。Rust中`char`的大�
 let tup: (i32, f64, u8) = (500, 6.4, 1);
 ```
 
-* Array
+- Array
 
 数组中所有元素类型必须一致，
 
@@ -115,15 +113,14 @@ let first = a[0]; // 数组索引
 
 函数使用关键字`fn`来标识。Rust 不关心函数定义的先后顺序，只要函数在调用函数可见的作用域即可。
 
-
 #### 参数(parameters)
 
-* Rust 中函数参数必须声明参数的类型
+- Rust 中函数参数必须声明参数的类型
 
 #### Statements and Expressions
 
-* 语句(statements)是执行某些操作不返回值的指令
-* 表达式(expressions)是存在评估结果值的,**表达式不包含结束的分号**。
+- 语句(statements)是执行某些操作不返回值的指令
+- 表达式(expressions)是存在评估结果值的,**表达式不包含结束的分号**。
 
 ```rust
 let y = 3; // 此处是语句，并不返回值
@@ -156,10 +153,11 @@ Rust 使用`//`进行行注释
 ## 控制流(Control Flow)
 
 #### if 表达式
+
 ```Rust
-fn main { 
+fn main {
 	let number = 3;
-	
+
 	if number < 5 {
 		println!("condition was true");
 	} else {
@@ -172,7 +170,7 @@ fn main {
 
 Rust 存在三种形式的循环。
 
-* loop
+- loop
 
 ```Rust
 fn main() {
@@ -184,9 +182,9 @@ fn main() {
 }
 ```
 
-* while
+- while
 
-* for
+- for
 
 ```Rust
 fn main() {
@@ -200,14 +198,14 @@ fn main() {
 
 ## 所有权(Ownership)
 
-所有权特性是Rust中的核心特征，用于保证在没有垃圾回收的前提下保证内存安全。所有权是一套
+所有权特性是 Rust 中的核心特征，用于保证在没有垃圾回收的前提下保证内存安全。所有权是一套
 规则集合用于管理内存。
 
 Owership Rules:
 
-* 每个值拥有一个拥有者
-* 一次只能拥有一个拥有者
-* 当拥有者超出作用域范围，值会被丢弃
+- 每个值拥有一个拥有者
+- 一次只能拥有一个拥有者
+- 当拥有者超出作用域范围，值会被丢弃
 
 Variable Scope:
 
@@ -255,12 +253,12 @@ fn calculate_length(s: &String)->usize{
 }
 ```
 
-* mutable reference(可变引用)
-	* 同一时刻不可以可变引用多次(防止对于数据的同时修改，避免数据竞争)
-	* 但是不再同一时刻发生的可变引用是可行的
-	* 不可以同时拥有可变引用和不可变引用
-	* 多个不可变引用是可行的，即不可变引用只具有读数据的权限
-	* 引用的作用域范围从被引入到最后一次该引用被使用时结束
+- mutable reference(可变引用)
+  - 同一时刻不可以可变引用多次(防止对于数据的同时修改，避免数据竞争)
+  - 但是不再同一时刻发生的可变引用是可行的
+  - 不可以同时拥有可变引用和不可变引用
+  - 多个不可变引用是可行的，即不可变引用只具有读数据的权限
+  - 引用的作用域范围从被引入到最后一次该引用被使用时结束
 
 ```Rust
 fn main() {
@@ -271,55 +269,65 @@ fn main() {
 
     let r2 = &mut s;
     println!("{r2}");
-    
+
 }
 
 ```
 
-* Dangling References(悬空引用)
-引用总是指向有效的内存地址。
-
+- Dangling References(悬空引用)
+  引用总是指向有效的内存地址。
 
 ## Packages and Crates
 
-* 一个crate 是编译器考虑的最小代码组织单元
-* crate 可以包含 modules 
-* 一个crate 可以以两种形式存在，二进制crate或库crate
-	* 包含 main 的crate是可执行文件
-	* 库crate不包含main函数
-* package 是包含一个或多个crates
-	* 一个package 包含一个 `Cargo.toml` 文件用于描述如何构建包中的`crates`
-	* 一个package 可以包含许多二进制`crates`,但是至多只有一个库`crate`
-* `src/main.rs`是二进制crate的root，`src/lib.rs`是库crate的root.
-* 一个package 可以放置多个二进制`crate`在`src/bin`目录下
+- 一个 crate 是编译器考虑的最小代码组织单元
+- crate 可以包含 modules
+- 一个 crate 可以以两种形式存在，二进制 crate 或库 crate
+  - 包含 main 的 crate 是可执行文件
+  - 库 crate 不包含 main 函数
+- package 是包含一个或多个 crates
+  - 一个 package 包含一个 `Cargo.toml` 文件用于描述如何构建包中的`crates`
+  - 一个 package 可以包含许多二进制`crates`,但是至多只有一个库`crate`
+- `src/main.rs`是二进制 crate 的 root，`src/lib.rs`是库 crate 的 root.
+- 一个 package 可以放置多个二进制`crate`在`src/bin`目录下
 
 #### 模块和路径系统
 
 编译器是如何工作的关于模块和路径：
 
-* 首先查找 `src/main.rs` 和 `src/lib.rs` 两个根 crate
-* 在 crate root file中我们可以声明新的模块，·例如`mod garden;`
-* 然后编译器在以下路径搜索模块的代码
-	* 内嵌模式 `mod garden {...}`
-	* 文件 `src/garden.rs`
-	* 文件 `src/garden/mod.rs`
-* 可以在非root crate 文件中声明子模块`mod vegetables;`
-	* 內联模式
-	* `src/garden/vegetables.rs`
-	* `src/garden/vegetables/mod.rs`
-* 同一个module内的所有内容可以被其他部分使用，只要遵循权限规则
-	* `crate::garden::vegetables::某个对象`
-* 私有和公有属性
-	* 默认情况下子模块内容对于父模块是不可见的
-	* 使用关键字`pub`改变权限
-* `use` 关键字可以减少过长路径的编写
-
+- 首先查找 `src/main.rs` 和 `src/lib.rs` 两个根 crate
+- 在 crate root file 中我们可以声明新的模块，·例如`mod garden;`
+- 然后编译器在以下路径搜索模块的代码
+  - 内嵌模式 `mod garden {...}`
+  - 文件 `src/garden.rs`
+  - 文件 `src/garden/mod.rs`
+- 可以在非 root crate 文件中声明子模块`mod vegetables;`
+  - 內联模式
+  - `src/garden/vegetables.rs`
+  - `src/garden/vegetables/mod.rs`
+- 同一个 module 内的所有内容可以被其他部分使用，只要遵循权限规则
+  - `crate::garden::vegetables::某个对象`
+- 私有和公有属性
+  - 默认情况下子模块内容对于父模块是不可见的
+  - 使用关键字`pub`改变权限
+- `use` 关键字可以减少过长路径的编写
 
 路径(PATH):
 
 为了指示如何在模块树中找到所需的对象，需要提供对象的路径(类似于文件系统)。
 
-* 绝对路径：对于外部crate的代码，绝对路径开始于crate name。对于当前crate,则使用`crate`
-* 相对路径：相对当前模块，使用`self`/`super`等关键字或者目前模块的标识符
+- 绝对路径：对于外部 crate 的代码，绝对路径开始于 crate name。对于当前 crate,则使用`crate`
+- 相对路径：相对当前模块，使用`self`/`super`等关键字或者目前模块的标识符
 
+## error handling(错误处理)
 
+#### 如何处理可能为 NULL 的值
+
+Rust 提供了枚举类型 `Option<T>`，其源码如下：
+
+```Rust
+// 该枚举变量既可以是None,也可以是指定类型 T 的某个值
+pub enum Option<T> {
+    None,
+    Some(T),
+}
+```
