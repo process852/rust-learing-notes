@@ -1,6 +1,6 @@
 # rust-learing-notes
 
-Learning Rust !!!
+Learning Rust !!! Hello World·
 
 ## 安装教程
 
